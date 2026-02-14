@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Amor - Pollo Volador</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Material Design 3 Color Palette */
+  --md-primary: #E91E63;
+  --md-primary-light: #F06292;
+  --md-primary-dark: #D81B60;
+  --md-secondary: #9C27B0;
+  --md-surface: #FFFFFF;
+  --md-background: linear-gradient(135deg, #FCE4EC 0%, #F3E5F5 50%, #FFF3E0 100%);
+  --md-on-surface: #1C1B1F;
+  --md-on-surface-variant: #49454F;
+  --md-outline: #79747E;
+  
+  /* Material Design 3 Elevation Shadows */
+  --md-elevation-1: 0 2px 4px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.12);
+  --md-elevation-2: 0 4px 8px rgba(0,0,0,0.10), 0 2px 4px rgba(0,0,0,0.14);
+  --md-elevation-3: 0 8px 16px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.16);
+  --md-elevation-4: 0 12px 24px rgba(0,0,0,0.14), 0 6px 12px rgba(0,0,0,0.18);
+  --md-elevation-5: 0 16px 32px rgba(0,0,0,0.16), 0 8px 16px rgba(0,0,0,0.20);
+  
+  /* Transitions */
+  --md-transition: 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: var(--md-background);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  position: relative;
+  color: var(--md-on-surface);
+}
+
+/* Floating Hearts Animation */
+.floating-heart {
+  position: fixed;
+  font-size: 20px;
+  color: var(--md-primary);
+  pointer-events: none;
+  z-index: 1;
+  animation: floatUp 8s ease-in-out infinite;
+  opacity: 0;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(0.5) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-100vh) scale(1.2) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.floating-heart:nth-child(1) { left: 10%; animation-delay: 0s; font-size: 18px; }
+.floating-heart:nth-child(2) { left: 25%; animation-delay: 1.5s; font-size: 24px; }
+.floating-heart:nth-child(3) { left: 40%; animation-delay: 3s; font-size: 20px; }
+.floating-heart:nth-child(4) { left: 55%; animation-delay: 4.5s; font-size: 22px; }
+.floating-heart:nth-child(5) { left: 70%; animation-delay: 6s; font-size: 19px; }
+.floating-heart:nth-child(6) { left: 85%; animation-delay: 2s; font-size: 21px; }
+.floating-heart:nth-child(7) { left: 15%; animation-delay: 5s; font-size: 23px; }
+.floating-heart:nth-child(8) { left: 90%; animation-delay: 7s; font-size: 18px; }
+
+/* Initial Card View */
+.initial-card-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  background: var(--md-background);
+  transition: opacity 0.6s var(--md-transition), visibility 0.6s var(--md-transition);
+}
+
+.initial-card-container.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.initial-card {
+  background: var(--md-surface);
+  border-radius: 24px;
+  box-shadow: var(--md-elevation-4);
+  padding: 48px 40px;
+  text-align: center;
+  max-width: 420px;
+  width: 90%;
+  cursor: pointer;
+  transition: all var(--md-transition);
+  animation: cardEntrance 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+@keyframes cardEntrance {
+  0% {
+    transform: scale(0.8) translateY(40px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.initial-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--md-elevation-5);
+}
+
+.initial-card:active {
+  transform: translateY(-4px) scale(0.98);
+}
+
+.initial-card-icon {
+  font-size: 80px;
+  margin-bottom: 24px;
+  animation: heartPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes heartPulse {
+  0%, 100% { transform: scale(1); }
+  10%, 30% { transform: scale(1.15); }
+  20%, 40% { transform: scale(1); }
+}
+
+.initial-card-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 56px;
+  color: var(--md-primary);
+  margin-bottom: 16px;
+  font-weight: 400;
+}
+
+.initial-card-text {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--md-on-surface-variant);
+  line-height: 1.6;
+  margin-bottom: 32px;
+  letter-spacing: 0.15px;
+}
+
+.tap-instruction {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--md-primary);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Main Content */
+.main-content {
+  width: 100%;
+  max-width: 100%;
+  padding: 24px;
+  opacity: 0;
+  transition: opacity 0.8s var(--md-transition) 0.3s;
+  overflow-y: auto;
+  max-height: 100vh;
+}
+
+.main-content.visible {
+  opacity: 1;
+}
+
+/* Message Section */
+.message-section {
+  background: var(--md-surface);
+  border-radius: 24px;
+  box-shadow: var(--md-elevation-2);
+  padding: 32px 24px;
+  margin-bottom: 24px;
+  animation: fadeInDown 0.8s var(--md-transition);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow var(--md-transition);
+}
+
+.message-section:hover {
+  box-shadow: var(--md-elevation-3);
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message-content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.photo-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.photo-card {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--md-elevation-2);
+  transition: all var(--md-transition);
+}
+
+.photo-card:hover {
+  transform: scale(1.02);
+  box-shadow: var(--md-elevation-3);
+}
+
+.photo-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.love-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 72px;
+  color: var(--md-primary);
+  text-align: center;
+  margin: 24px 0;
+  position: relative;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+.love-title::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--md-primary-light), transparent);
+  border-radius: 2px;
+}
+
+.message-text {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.8;
+  color: var(--md-on-surface);
+  text-align: center;
+  padding: 0 16px;
+  letter-spacing: 0.15px;
+}
+
+.message-text strong {
+  color: var(--md-primary);
+  font-weight: 500;
+}
+
+/* Game Section */
+.game-section {
+  background: var(--md-surface);
+  border-radius: 24px;
+  box-shadow: var(--md-elevation-2);
+  padding: 32px 24px;
+  animation: fadeInUp 1s var(--md-transition) 0.3s both;
+  transition: box-shadow var(--md-transition);
+}
+
+.game-section:hover {
+  box-shadow: var(--md-elevation-3);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.game-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.game-title {
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--md-on-surface);
+  margin-bottom: 12px;
+  letter-spacing: 0.15px;
+}
+
+.game-instructions {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--md-on-surface-variant);
+  line-height: 1.6;
+  letter-spacing: 0.25px;
+}
+
+/* Difficulty Selector */
+.difficulty-container {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.difficulty-chip {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 20px;
+  border-radius: 24px;
+  border: 1px solid var(--md-outline);
+  background: var(--md-surface);
+  color: var(--md-on-surface-variant);
+  cursor: pointer;
+  transition: all var(--md-transition);
+  letter-spacing: 0.5px;
+}
+
+.difficulty-chip:hover {
+  background: rgba(233, 30, 99, 0.08);
+  border-color: var(--md-primary-light);
+  transform: translateY(-2px);
+  box-shadow: var(--md-elevation-1);
+}
+
+.difficulty-chip:active {
+  transform: translateY(0) scale(0.95);
+}
+
+.difficulty-chip.active {
+  background: var(--md-primary);
+  color: var(--md-surface);
+  border-color: var(--md-primary);
+  box-shadow: var(--md-elevation-2);
+}
+
+/* Score Display */
+.score-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.score-card {
+  background: rgba(233, 30, 99, 0.05);
+  border-radius: 16px;
+  padding: 16px 24px;
+  box-shadow: var(--md-elevation-1);
+  text-align: center;
+  min-width: 120px;
+  transition: all var(--md-transition);
+}
+
+.score-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--md-elevation-2);
+}
+
+.score-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--md-on-surface-variant);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.score-value {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--md-primary);
+  line-height: 1;
+}
+
+/* Game Canvas */
+.game-canvas-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background: linear-gradient(to bottom, #E3F2FD 0%, #FFFFFF 100%);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.08);
+  touch-action: none;
+  transition: box-shadow var(--md-transition);
+  cursor: pointer;
+}
+
+.game-canvas-container:hover {
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.12), var(--md-elevation-1);
+}
+
+#gameCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Controls */
+.controls-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.md-button {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.25px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: all var(--md-transition);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.md-button:hover {
+  transform: translateY(-2px);
+}
+
+.md-button:active {
+  transform: translateY(0) scale(0.95);
+}
+
+.md-button-raised {
+  background: var(--md-primary);
+  color: var(--md-surface);
+  box-shadow: var(--md-elevation-2);
+}
+
+.md-button-raised:hover {
+  box-shadow: var(--md-elevation-3);
+  background: var(--md-primary-dark);
+}
+
+.md-button-outlined {
+  background: transparent;
+  color: var(--md-primary);
+  border: 1px solid var(--md-outline);
+}
+
+.md-button-outlined:hover {
+  background: rgba(233, 30, 99, 0.08);
+  border-color: var(--md-primary);
+  box-shadow: var(--md-elevation-1);
+}
+
+/* Ripple Effect */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(0);
+  animation: ripple-animation 0.6s ease-out;
+  pointer-events: none;
+}
+
+@keyframes ripple-animation {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Snackbar */
+.snackbar {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--md-on-surface);
+  color: var(--md-surface);
+  padding: 14px 24px;
+  border-radius: 8px;
+  box-shadow: var(--md-elevation-3);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.25px;
+  z-index: 2000;
+  opacity: 0;
+  transition: all var(--md-transition);
+  max-width: 90%;
+  text-align: center;
+}
+
+.snackbar.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .main-content {
+    padding: 32px;
+  }
+  
+  .message-section {
+    padding: 48px 40px;
+  }
+  
+  .message-content {
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .photo-container {
+    flex: 0 0 320px;
+  }
+  
+  .text-content {
+    flex: 1;
+    padding-left: 40px;
+  }
+  
+  .love-title {
+    font-size: 96px;
+  }
+  
+  .game-section {
+    padding: 40px 32px;
+  }
+  
+  .game-canvas-container {
+    height: 500px;
+  }
+  
+  .game-title {
+    font-size: 40px;
+  }
+  
+  .game-instructions {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .initial-card {
+    padding: 32px 24px;
+  }
+  
+  .initial-card-icon {
+    font-size: 64px;
+  }
+  
+  .initial-card-title {
+    font-size: 42px;
+  }
+  
+  .love-title {
+    font-size: 56px;
+  }
+  
+  .message-text {
+    font-size: 14px;
+  }
+  
+  .game-canvas-container {
+    height: 350px;
+  }
+  
+  .score-value {
+    font-size: 28px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Floating Hearts -->
+<div class="floating-heart">❤</div>
+<div class="floating-heart">♥</div>
+<div class="floating-heart">❤</div>
+<div class="floating-heart">♥</div>
+<div class="floating-heart">❤</div>
+<div class="floating-heart">♥</div>
+<div class="floating-heart">❤</div>
+<div class="floating-heart">♥</div>
+
+<!-- Initial Card -->
+<div class="initial-card-container" id="initialCard">
+  <div class="initial-card" onclick="openCard()">
+    <div class="initial-card-icon">💝</div>
+    <h1 class="initial-card-title">Para Ti</h1>
+    <p class="initial-card-text">Un mensaje especial te espera...</p>
+    <div class="tap-instruction">
+      <span class="material-icons">touch_app</span>
+      <span>Toca para abrir</span>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div class="main-content" id="mainContent">
+  <!-- Message Section -->
+  <div class="message-section">
+    <div class="message-content">
+      <div class="photo-container">
+        <div class="photo-card">
+          <img src="JUNTOS.jpeg" alt="Amor">
+        </div>
+      </div>
+      
+      <div class="text-content">
+        <h1 class="love-title">amor</h1>
+        <div class="message-text">
+          <strong>Mi Amor,</strong><br><br>
+          Cada momento contigo es un tesoro que guardo cerca de mi corazón. Tu sonrisa ilumina mis días más oscuros, y tu amor me da fuerzas para enfrentar cualquier cosa.<br><br>
+          Eres mi inspiración, mi paz y mi felicidad. Gracias por ser mi compañera, mi mejor amiga y el amor de mi vida.<br><br>
+          Hoy y siempre, te amo con todo mi corazón. ❤️<br><br>
+          <strong>Por Siempre Tuyo</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Game Section -->
+  <div class="game-section">
+    <div class="game-header">
+      <h2 class="game-title">Pollo Volador 🐔</h2>
+      <p class="game-instructions">Toca o haz clic para volar, evita los corazones</p>
+    </div>
+    
+    <!-- Difficulty Selector -->
+    <div class="difficulty-container">
+      <div class="difficulty-chip" data-difficulty="easy">Fácil</div>
+      <div class="difficulty-chip active" data-difficulty="medium">Medio</div>
+      <div class="difficulty-chip" data-difficulty="hard">Difícil</div>
+    </div>
+    
+    <!-- Score Display -->
+    <div class="score-container">
+      <div class="score-card">
+        <div class="score-label">Puntos</div>
+        <div class="score-value" id="scoreValue">0</div>
+      </div>
+      <div class="score-card">
+        <div class="score-label">Mejor</div>
+        <div class="score-value" id="bestValue">0</div>
+      </div>
+    </div>
+    
+    <!-- Game Canvas -->
+    <div class="game-canvas-container">
+      <canvas id="gameCanvas"></canvas>
+    </div>
+    
+    <!-- Controls -->
+    <div class="controls-container">
+      <button class="md-button md-button-raised" id="startBtn" onclick="startGame()">
+        <span class="material-icons" style="font-size: 18px;">play_arrow</span>
+        Comenzar
+      </button>
+      <button class="md-button md-button-outlined" id="instructionsBtn">
+        <span class="material-icons" style="font-size: 18px;">help_outline</span>
+        Ayuda
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Snackbar -->
+<div class="snackbar" id="snackbar"></div>
+
+<script>
+// Initial Card
+function openCard() {
+  const initialCard = document.getElementById('initialCard');
+  const mainContent = document.getElementById('mainContent');
+  
+  initialCard.classList.add('hidden');
+  setTimeout(() => {
+    mainContent.classList.add('visible');
+    showSnackbar('¡Bienvenido! Toca para volar 🐔');
+  }, 300);
+}
+
+// Game Variables
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+let canvasWidth, canvasHeight;
+
+// Game State
+let score = 0;
+let bestScore = 0;
+let difficulty = 'medium';
+let gameStarted = false;
+let gameOver = false;
+let animationId;
+
+// Chicken
+let chicken = {
+  x: 100,
+  y: 200,
+  velocity: 0,
+  gravity: 0.5,
+  jump: -9,
+  size: 35,
+  rotation: 0
+};
+
+// Heart Obstacles
+let hearts = [];
+let heartSpeed = 3;
+let heartGap = 180;
+let heartWidth = 60;
+let frameCount = 0;
+
+// Difficulty Settings
+const difficultySettings = {
+  easy: { speed: 2, gap: 200, frequency: 120 },
+  medium: { speed: 3, gap: 180, frequency: 100 },
+  hard: { speed: 4, gap: 160, frequency: 80 }
+};
+
+// Initialize Canvas
+function initCanvas() {
+  const container = canvas.parentElement;
+  canvasWidth = container.clientWidth;
+  canvasHeight = container.clientHeight;
+  canvas.width = canvasWidth;
+  canvas.height = canvasHeight;
+  
+  chicken.y = canvasHeight / 2;
+}
+
+// Draw Heart
+function drawHeart(x, y, size, color) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.scale(size / 50, size / 50);
+  
+  ctx.beginPath();
+  ctx.moveTo(0, 15);
+  ctx.bezierCurveTo(-25, -10, -50, 5, -25, 40);
+  ctx.lineTo(0, 60);
+  ctx.lineTo(25, 40);
+  ctx.bezierCurveTo(50, 5, 25, -10, 0, 15);
+  ctx.closePath();
+  
+  ctx.fillStyle = color;
+  ctx.fill();
+  
+  ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
+  ctx.shadowBlur = 8;
+  ctx.shadowOffsetY = 3;
+  
+  ctx.restore();
+}
+
+// Draw Chicken
+function drawChicken() {
+  ctx.save();
+  ctx.translate(chicken.x, chicken.y);
+  ctx.rotate(chicken.rotation);
+  
+  // Draw chicken emoji
+  ctx.font = `${chicken.size}px Arial`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('🐔', 0, 0);
+  
+  ctx.restore();
+}
+
+// Draw Hearts Obstacles
+function drawHearts() {
+  hearts.forEach(heart => {
+    // Top heart
+    drawHeart(heart.x + heartWidth/2, heart.topY + 30, 50, '#E91E63');
+    
+    // Bottom heart
+    drawHeart(heart.x + heartWidth/2, heart.bottomY - 30, 50, '#E91E63');
+  });
+}
+
+// Update Game
+function update() {
+  if (!gameStarted || gameOver) return;
+  
+  // Update chicken
+  chicken.velocity += chicken.gravity;
+  chicken.y += chicken.velocity;
+  chicken.rotation = Math.min(Math.max(chicken.velocity * 0.05, -0.5), 0.5);
+  
+  // Check boundaries
+  if (chicken.y + chicken.size/2 > canvasHeight || chicken.y - chicken.size/2 < 0) {
+    endGame();
+    return;
+  }
+  
+  // Update hearts
+  frameCount++;
+  const settings = difficultySettings[difficulty];
+  
+  if (frameCount % settings.frequency === 0) {
+    const minGap = 100;
+    const maxGap = canvasHeight - settings.gap - 100;
+    const gapY = Math.random() * (maxGap - minGap) + minGap;
+    
+    hearts.push({
+      x: canvasWidth,
+      topY: gapY - settings.gap / 2,
+      bottomY: gapY + settings.gap / 2,
+      scored: false
+    });
+  }
+  
+  for (let i = hearts.length - 1; i >= 0; i--) {
+    hearts[i].x -= settings.speed;
+    
+    // Check collision
+    if (hearts[i].x < chicken.x + chicken.size/2 && 
+        hearts[i].x + heartWidth > chicken.x - chicken.size/2) {
+      if (chicken.y - chicken.size/2 < hearts[i].topY + 60 || 
+          chicken.y + chicken.size/2 > hearts[i].bottomY - 60) {
+        endGame();
+        return;
+      }
+    }
+    
+    // Score point
+    if (!hearts[i].scored && hearts[i].x + heartWidth < chicken.x) {
+      hearts[i].scored = true;
+      score++;
+      updateScore();
+    }
+    
+    // Remove off-screen hearts
+    if (hearts[i].x + heartWidth < 0) {
+      hearts.splice(i, 1);
+    }
+  }
+}
+
+// Draw Game
+function draw() {
+  ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+  
+  drawHearts();
+  drawChicken();
+  
+  // Draw start message
+  if (!gameStarted) {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+    ctx.font = '24px Roboto';
+    ctx.textAlign = 'center';
+    ctx.fillText('Toca para comenzar', canvasWidth / 2, canvasHeight / 2);
+  }
+  
+  // Draw game over
+  if (gameOver) {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+    ctx.font = 'bold 32px Roboto';
+    ctx.textAlign = 'center';
+    ctx.fillText('¡Juego Terminado!', canvasWidth / 2, canvasHeight / 2 - 40);
+    ctx.font = '20px Roboto';
+    ctx.fillText(`Puntuación: ${score}`, canvasWidth / 2, canvasHeight / 2);
+    ctx.font = '18px Roboto';
+    ctx.fillText('Toca para reiniciar', canvasWidth / 2, canvasHeight / 2 + 40);
+  }
+}
+
+// Game Loop
+function gameLoop() {
+  update();
+  draw();
+  animationId = requestAnimationFrame(gameLoop);
+}
+
+// Flap
+function flap() {
+  if (gameOver) {
+    restartGame();
+    return;
+  }
+  
+  if (!gameStarted) {
+    gameStarted = true;
+    showSnackbar('¡Vuela! 🐔');
+  }
+  
+  chicken.velocity = chicken.jump;
+}
+
+// Start Game
+function startGame() {
+  if (!gameStarted) {
+    gameStarted = true;
+    showSnackbar('¡Vuela! 🐔❤️');
+    // Update button
+    const btn = document.getElementById('startBtn');
+    btn.innerHTML = '<span class="material-icons" style="font-size: 18px;">refresh</span> Reiniciar';
+  } else if (gameOver) {
+    restartGame();
+  }
+}
+
+// End Game
+function endGame() {
+  gameOver = true;
+  if (score > bestScore) {
+    bestScore = score;
+    updateScore();
+    showSnackbar(`¡Nuevo récord! ${score} puntos 🎉`);
+  } else {
+    showSnackbar(`Puntuación: ${score}`);
+  }
+}
+
+// Restart Game
+function restartGame() {
+  score = 0;
+  gameStarted = false;
+  gameOver = false;
+  chicken.y = canvasHeight / 2;
+  chicken.velocity = 0;
+  chicken.rotation = 0;
+  hearts = [];
+  frameCount = 0;
+  updateScore();
+}
+
+// Update Score
+function updateScore() {
+  document.getElementById('scoreValue').textContent = score;
+  document.getElementById('bestValue').textContent = bestScore;
+}
+
+// Show Snackbar
+function showSnackbar(message) {
+  const snackbar = document.getElementById('snackbar');
+  snackbar.textContent = message;
+  snackbar.classList.add('show');
+  
+  setTimeout(() => {
+    snackbar.classList.remove('show');
+  }, 3000);
+}
+
+// Button Ripple
+function createButtonRipple(e) {
+  const button = e.currentTarget;
+  const ripple = document.createElement('span');
+  ripple.classList.add('ripple');
+  
+  const rect = button.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height);
+  const x = e.clientX - rect.left - size / 2;
+  const y = e.clientY - rect.top - size / 2;
+  
+  ripple.style.width = ripple.style.height = size + 'px';
+  ripple.style.left = x + 'px';
+  ripple.style.top = y + 'px';
+  
+  button.appendChild(ripple);
+  setTimeout(() => ripple.remove(), 600);
+}
+
+// Event Listeners - more direct approach
+function handleInput(e) {
+  if (e) e.preventDefault();
+  flap();
+}
+
+canvas.addEventListener('mousedown', handleInput);
+canvas.addEventListener('touchstart', handleInput);
+
+document.getElementById('startBtn').addEventListener('click', (e) => {
+  createButtonRipple(e);
+  if (!gameStarted) {
+    flap();
+  } else {
+    restartGame();
+  }
+});
+
+document.getElementById('instructionsBtn').addEventListener('click', (e) => {
+  createButtonRipple(e);
+  showSnackbar('Toca para volar. Evita los corazones. ¡Consigue la puntuación más alta! 🐔❤️');
+});
+
+// Difficulty Selection
+document.querySelectorAll('.difficulty-chip').forEach(chip => {
+  chip.addEventListener('click', function() {
+    document.querySelectorAll('.difficulty-chip').forEach(c => c.classList.remove('active'));
+    this.classList.add('active');
+    difficulty = this.dataset.difficulty;
+    const difficultyNames = { easy: 'FÁCIL', medium: 'MEDIO', hard: 'DIFÍCIL' };
+    showSnackbar(`Dificultad: ${difficultyNames[difficulty]}`);
+    restartGame();
+  });
+});
+
+// Keyboard controls
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'Space' || e.code === 'ArrowUp') {
+    e.preventDefault();
+    flap();
+  }
+});
+
+// Initialize
+window.addEventListener('load', () => {
+  initCanvas();
+  updateScore();
+  gameLoop();
+});
+
+window.addEventListener('resize', () => {
+  initCanvas();
+});
+</script>
+
+</body>
+</html>
